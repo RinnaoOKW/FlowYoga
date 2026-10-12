@@ -1,0 +1,40 @@
+server:
+  port: 17081
+  shutdown: graceful
+
+spring:
+  application:
+    name: flowyoga-user
+  cloud:
+    nacos:
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:nacos}
+      discovery:
+        server-addr: ${NACOS_ADDR:127.0.0.1:8848}
+        ip: ${NACOS_DISCOVERY_IP:127.0.0.1}
+        ip-type: IPv4
+        cluster-name: DEFAULT
+        fail-fast: true
+        health-indicator:
+          enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
+
+logging:
+  charset:
+    console: UTF-8
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [rid:%X{requestId:-}] [%15.15t] %-40.40logger{39} : %m%n"
