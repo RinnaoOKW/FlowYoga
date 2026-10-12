@@ -1,2 +1,2 @@
-# FlowYoga-
+# FlowYoga
 A Yoga system
