@@ -1,0 +1,23 @@
+services:
+  nacos:
+    image: nacos/nacos-server:v3.1.1
+    container_name: flowyoga-nacos
+    environment:
+      MODE: standalone
+      TZ: Asia/Shanghai
+      NACOS_AUTH_ENABLE: "false"
+      NACOS_AUTH_TOKEN: VGhpc0lzTXlDdXN0b21TZWNyZXRLZXkwMTIzNDU2Nzg=
+      NACOS_AUTH_IDENTITY_KEY: serverIdentity
+      NACOS_AUTH_IDENTITY_VALUE: security
+      JVM_XMS: 256m
+      JVM_XMX: 512m
+    ports:
+      - "8080:8080"
+      - "8848:8848"
+      - "9848:9848"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8080/v3/console/health/readiness || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 40s
