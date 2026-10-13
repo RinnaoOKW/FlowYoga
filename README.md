@@ -36,6 +36,18 @@
 .\scripts\stop-dev.ps1
 ```
 
+启动脚本先执行 Maven 打包，再通过 `java -jar` 启动四个服务，把 JVM 的 PID、启动时间、jar 路径和工作区写入 `logs/dev-processes.json`。已有启动记录时，先运行停止脚本再重新启动；打包或 Docker 启动失败会立即中止。停止脚本必须同时核对工作区、PID、启动时间和实际 jar 参数，匹配后才结束对应进程，不根据端口批量结束进程。
+
+没有记录时停止脚本不会结束任何进程。旧版 `spring-boot:run` 或 IDE 启动的服务请在原终端或 IDE 中停止，再切换到上述启动方式。进程记录位于已忽略的 `logs/` 目录，不提交到 Git。
+
+运行脚本的安全回归检查：
+
+```powershell
+.\scripts\test-dev-processes.ps1
+```
+
+该检查使用进程、构建和 Docker 替身，验证其他工作区、复用 PID、读取失败、重复启动和部分启动失败的处理，不结束真实进程。
+
 验证请求：
 
 ```powershell
