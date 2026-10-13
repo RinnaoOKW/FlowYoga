@@ -3,6 +3,16 @@ server:
   shutdown: graceful
 
 spring:
+  config:
+    import: optional:file:./logs/stage2-local.properties
+  datasource:
+    url: ${FLOWYOGA_USER_DB_URL:jdbc:mysql://127.0.0.1:13306/flowyoga_user?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8}
+    username: ${FLOWYOGA_USER_DB_USERNAME:flowyoga_user}
+    password: ${flowyoga.database.user-password:}
+    hikari:
+      maximum-pool-size: 5
+  flyway:
+    enabled: true
   application:
     name: flowyoga-user
   cloud:
@@ -38,3 +48,17 @@ logging:
     console: UTF-8
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [rid:%X{requestId:-}] [%15.15t] %-40.40logger{39} : %m%n"
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    arg-name-based-constructor-auto-mapping: true
+
+flowyoga:
+  security:
+    jwt-secret: ${FLOWYOGA_JWT_SECRET:}
+    secure-cookie: ${FLOWYOGA_SECURE_COOKIE:false}
+  demo:
+    enabled: ${FLOWYOGA_DEMO_ENABLED:false}
+  internal:
+    account-token: ${FLOWYOGA_ACCOUNT_INTERNAL_TOKEN:}

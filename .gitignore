@@ -1,4 +1,7 @@
 target/
+node_modules/
+frontend/dist/
+.env.local
 logs/
 *.log
 .DS_Store

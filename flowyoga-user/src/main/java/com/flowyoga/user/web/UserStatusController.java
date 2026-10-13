@@ -13,7 +13,7 @@ public class UserStatusController {
     @GetMapping("/api/user/status")
     public ServiceStatusResponse status() {
         log.info("user service status");
-        return new ServiceStatusResponse("flowyoga-user", "UP", "账号与权限将在下一阶段接入");
+        return new ServiceStatusResponse("flowyoga-user", "UP", "账号与权限服务已就绪");
     }
 
     public record ServiceStatusResponse(String service, String status, String message) {

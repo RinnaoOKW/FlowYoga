@@ -3,6 +3,8 @@ server:
   shutdown: graceful
 
 spring:
+  config:
+    import: optional:file:./logs/stage2-local.properties
   application:
     name: flowyoga-gateway
   cloud:
@@ -41,3 +43,7 @@ logging:
     console: UTF-8
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [rid:%X{requestId:-}] [%15.15t] %-40.40logger{39} : %m%n"
+
+flowyoga:
+  security:
+    jwt-secret: ${FLOWYOGA_JWT_SECRET:}

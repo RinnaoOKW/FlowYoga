@@ -19,6 +19,8 @@
     <description>单门店瑜伽馆管理系统</description>
 
     <modules>
+        <module>flowyoga-security</module>
+        <module>flowyoga-management</module>
         <module>flowyoga-gateway</module>
         <module>flowyoga-user</module>
         <module>flowyoga-member</module>

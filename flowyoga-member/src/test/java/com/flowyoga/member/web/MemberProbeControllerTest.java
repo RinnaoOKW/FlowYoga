@@ -9,10 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import com.flowyoga.management.AccountClient;
+import com.flowyoga.management.DirectorySecurityConfiguration;
 
 @WebMvcTest(MemberProbeController.class)
-@TestPropertySource(properties = "flowyoga.internal.token=dev-internal-token")
+@Import(DirectorySecurityConfiguration.class)
+@TestPropertySource(properties = {"flowyoga.internal.token=dev-internal-token","flowyoga.security.jwt-secret=MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWY="})
 class MemberProbeControllerTest {
+    @MockitoBean AccountClient accountClient;
 
     @Autowired
     private MockMvc mockMvc;

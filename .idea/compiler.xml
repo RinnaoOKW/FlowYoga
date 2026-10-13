@@ -9,6 +9,7 @@
         <module name="flowyoga-gateway" />
         <module name="flowyoga-course" />
         <module name="flowyoga-user" />
+        <module name="flowyoga-security" />
         <module name="flowyoga-member" />
       </profile>
     </annotationProcessing>
@@ -18,6 +19,7 @@
       <module name="flowyoga-course" options="-parameters" />
       <module name="flowyoga-gateway" options="-parameters" />
       <module name="flowyoga-member" options="-parameters" />
+      <module name="flowyoga-security" options="-parameters" />
       <module name="flowyoga-user" options="-parameters" />
     </option>
   </component>

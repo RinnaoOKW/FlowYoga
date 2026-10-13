@@ -3,6 +3,18 @@ server:
   shutdown: graceful
 
 spring:
+  config:
+    import: optional:file:./logs/stage2-local.properties
+  datasource:
+    url: ${FLOWYOGA_COURSE_DB_URL:jdbc:mysql://127.0.0.1:13306/flowyoga_course?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8}
+    username: ${FLOWYOGA_COURSE_DB_USERNAME:flowyoga_course}
+    password: ${flowyoga.database.course-password:}
+    hikari:
+      maximum-pool-size: 5
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 1
   application:
     name: flowyoga-course
   cloud:
@@ -28,7 +40,12 @@ spring:
         enabled: true
 
 flowyoga:
+  security:
+    jwt-secret: ${FLOWYOGA_JWT_SECRET:}
+  demo:
+    enabled: ${FLOWYOGA_DEMO_ENABLED:false}
   internal:
+    account-token: ${FLOWYOGA_ACCOUNT_INTERNAL_TOKEN:}
     token: ${FLOWYOGA_INTERNAL_TOKEN:dev-internal-token}
 
 management:
